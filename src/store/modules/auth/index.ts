@@ -2,10 +2,10 @@ import { computed, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { defineStore } from 'pinia';
 import { useLoading } from '@sa/hooks';
-import { SetupStoreId } from '@/enum';
-import { useRouterPush } from '@/hooks/common/router';
 import { fetchGetUserInfo, fetchLogin } from '@/service/api';
+import { useRouterPush } from '@/hooks/common/router';
 import { localStg } from '@/utils/storage';
+import { SetupStoreId } from '@/enum';
 import { $t } from '@/locales';
 import { useRouteStore } from '../route';
 import { useTabStore } from '../tab';
@@ -67,7 +67,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     if (!error) {
       const pass = await loginByToken(loginToken);
-
       if (pass) {
         await redirectFromLogin(redirect);
 
@@ -103,7 +102,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   async function getUserInfo() {
     const { data: info, error } = await fetchGetUserInfo();
-
     if (!error) {
       // update store
       Object.assign(userInfo, info);
