@@ -76,8 +76,8 @@
             :disabled="!clientInitData.connected || !publishInfo.payload"
             class="bg-black text-white"
           >
-            <span class="text-white">发送</span>
-            <el-icon class="el-icon--right text-white">
+            <span class="text-blue">发送</span>
+            <el-icon class="el-icon--right text-blue">
               <Right/>
             </el-icon>
           </el-button>
@@ -146,8 +146,9 @@
 
 <script setup lang="ts">
 import {nextTick, onMounted, onUnmounted, ref} from 'vue';
-import mqtt, { MqttClient, IClientOptions, IClientSubscribeOptions, IClientPublishOptions, ClientSubscribeCallback } from 'mqtt';
 import { ElMessage, ElNotification, ElScrollbar } from 'element-plus';
+import type { ClientSubscribeCallback, IClientOptions, IClientPublishOptions, IClientSubscribeOptions, MqttClient } from 'mqtt';
+import mqtt from 'mqtt';
 import { CircleCheck, CircleClose, Minus, Plus, Right } from '@element-plus/icons-vue';
 
 // Define a type for QoS based on MQTT standard
