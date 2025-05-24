@@ -53,9 +53,10 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
     <!--    <WaveBg :theme-color="bgThemeColor" />-->
     <ElCard class="relative z-4 w-auto rd-12px">
       <div class="w-400px lt-sm:w-300px">
-        <header class="flex-y-center justify-between">
+        <header class="w-full flex items-center justify-between">
+          <div class="w-1/10"></div>
           <SystemLogo class="text-50px text-primary lt-sm:text-48px" />
-          <h3 class="text-28px text-primary font-500 lt-sm:text-22px">{{ $t('system.title') }}</h3>
+          <!--          <h3 class="text-28px text-primary font-500 lt-sm:text-22px">{{ $t('system.title') }}</h3>-->
           <div class="i-flex-col">
             <ThemeSchemaSwitch
               :theme-schema="themeStore.themeScheme"

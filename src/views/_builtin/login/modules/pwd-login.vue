@@ -120,4 +120,8 @@ async function handleAccountLogin(account: Account) {
   </ElForm>
 </template>
 
-<style scoped></style>
+<style scoped>
+:deep(.el-input__wrapper) {
+  border-radius: 18px;
+}
+</style>
