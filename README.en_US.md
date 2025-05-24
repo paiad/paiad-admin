@@ -6,7 +6,7 @@
 
 </div>
 
-> [!TIP]
+> [!note]
 > Love `paiad-admin`? Please give us a ⭐️ on GitHub! Your support drives our continuous improvement!
 
 ## Overview
