@@ -1,22 +1,22 @@
-import { computed, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { defineStore } from 'pinia';
-import { useLoading } from '@sa/hooks';
-import { fetchGetUserInfo, fetchLogin } from '@/service/api';
-import { useRouterPush } from '@/hooks/common/router';
-import { localStg } from '@/utils/storage';
-import { SetupStoreId } from '@/enum';
-import { $t } from '@/locales';
-import { useRouteStore } from '../route';
-import { useTabStore } from '../tab';
-import { clearAuthStorage, getToken } from './shared';
+import {computed, reactive, ref} from 'vue';
+import {useRoute} from 'vue-router';
+import {defineStore} from 'pinia';
+import {useLoading} from '@sa/hooks';
+import {fetchGetUserInfo, fetchLogin, fetchLogout} from '@/service/api';
+import {useRouterPush} from '@/hooks/common/router';
+import {localStg} from '@/utils/storage';
+import {SetupStoreId} from '@/enum';
+import {$t} from '@/locales';
+import {useRouteStore} from '../route';
+import {useTabStore} from '../tab';
+import {clearAuthStorage, getToken} from './shared';
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const route = useRoute();
   const routeStore = useRouteStore();
   const tabStore = useTabStore();
-  const { toLogin, redirectFromLogin } = useRouterPush(false);
-  const { loading: loginLoading, startLoading, endLoading } = useLoading();
+  const {toLogin, redirectFromLogin} = useRouterPush(false);
+  const {loading: loginLoading, startLoading, endLoading} = useLoading();
 
   const token = ref(getToken());
 
@@ -32,7 +32,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   /** is super role in static route */
   const isStaticSuper = computed(() => {
-    const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env;
+    const {VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE} = import.meta.env;
 
     return VITE_AUTH_ROUTE_MODE === 'static' && userInfo.roles.includes(VITE_STATIC_SUPER_ROLE);
   });
@@ -66,7 +66,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   async function login(userName: string, password: string, redirect = true) {
     startLoading();
 
-    const { data: loginToken, error } = await fetchLogin(userName, password);
+    const {data: loginToken, error} = await fetchLogin(userName, password);
 
     if (!error) {
       const pass = await loginByToken(loginToken);
@@ -75,7 +75,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
         window.$notification?.success({
           title: $t('page.login.common.loginSuccess'),
-          message: $t('page.login.common.welcomeBack', { userName: userInfo.userName }),
+          message: $t('page.login.common.welcomeBack', {userName: userInfo.userName}),
           duration: 4500
         });
       }
@@ -104,7 +104,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function getUserInfo() {
-    const { data: info, error } = await fetchGetUserInfo();
+    const {data: info, error} = await fetchGetUserInfo();
     if (!error) {
       // update store
       Object.assign(userInfo, info);
@@ -115,6 +115,12 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     return false;
   }
 
+  /** Logout user */
+  async function logout() {
+    await fetchLogout();
+    await resetStore();
+  }
+
   async function initUserInfo() {
     const hasToken = getToken();
 
@@ -122,7 +128,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       const pass = await getUserInfo();
 
       if (!pass) {
-        resetStore();
+        await resetStore();
       }
     }
   }
@@ -135,6 +141,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     loginLoading,
     resetStore,
     login,
+    logout,
     initUserInfo
   };
 });

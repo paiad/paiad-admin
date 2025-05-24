@@ -22,6 +22,15 @@ export function fetchGetUserInfo() {
   return request<Api.Auth.UserInfo>({ url: '/auth/getUserInfo' });
 }
 
+/** Logout user */
+export function fetchLogout() {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  return request<Api.Auth.LogoutResult>({
+    url: '/auth/logout',
+    method: 'POST'
+  });
+}
+
 /**
  * Refresh token
  *

@@ -68,6 +68,8 @@ declare namespace Api {
       roles: string[];
       buttons: string[];
     }
+
+    type LogoutResult = boolean;
   }
 
   /**
