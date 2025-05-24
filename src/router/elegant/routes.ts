@@ -46,7 +46,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'about',
       i18nKey: 'route.about',
-      icon: 'fluent:book-information-24-regular',
+      icon: 'hugeicons:note-edit',
       order: 10
     }
   },
@@ -102,7 +102,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'function',
       i18nKey: 'route.function',
-      icon: 'icon-park-outline:all-application',
+      icon: 'tabler:function',
       order: 6
     },
     children: [
@@ -318,6 +318,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     path: '/multi-menu',
     component: 'layout.base',
     meta: {
+      icon: "gg:menu-round",
       title: 'multi-menu',
       i18nKey: 'route.multi-menu',
       order: 8
@@ -383,7 +384,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: '插件示例',
       i18nKey: 'route.plugin',
       order: 7,
-      icon: 'clarity:plugin-line'
+      icon: 'tabler:puzzle'
     },
     children: [
       {
