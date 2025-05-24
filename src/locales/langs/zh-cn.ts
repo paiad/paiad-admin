@@ -244,6 +244,7 @@ const local: App.I18n.Schema = {
         back: '返回',
         validateSuccess: '验证成功',
         loginSuccess: '登录成功',
+        welcomeLogin: '欢迎登录',
         welcomeBack: '欢迎回来，{userName} ！'
       },
       pwdLogin: {

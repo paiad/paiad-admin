@@ -421,6 +421,7 @@ declare namespace App {
             back: string;
             validateSuccess: string;
             loginSuccess: string;
+            welcomeLogin:string;
             welcomeBack: string;
           };
           pwdLogin: {

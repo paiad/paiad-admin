@@ -244,6 +244,7 @@ const local: App.I18n.Schema = {
         back: 'Back',
         validateSuccess: 'Verification passed',
         loginSuccess: 'Login successfully',
+        welcomeLogin: 'Welcome',
         welcomeBack: 'Welcome back, {userName} !'
       },
       pwdLogin: {

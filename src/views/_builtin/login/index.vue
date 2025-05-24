@@ -9,6 +9,7 @@ import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
 import ResetPwd from './modules/reset-pwd.vue';
 import BindWechat from './modules/bind-wechat.vue';
+import {$t} from "../../../locales";
 
 defineOptions({ name: 'LoginPage' });
 
@@ -48,25 +49,25 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
       refresh
     />
     <!--    <WaveBg :theme-color="bgThemeColor" />-->
-    <ElCard class="relative z-4 w-auto rd-26px backdrop-blur-md -mt-50px">
+    <ElCard class="relative z-4 w-auto rd-26px backdrop-blur-md -mt-60px">
       <div class="w-345px lt-sm:w-300px">
-        <header class="w-full flex items-center justify-between">
+        <header class="w-full flex items-center justify-between pt-5 pb-3">
           <div class="w-1/10"></div>
           <SystemLogo class="text-40px text-primary lt-sm:text-48px" />
-          <h2 class="mr-8 select-none text-2xl font-extrabold tracking-wide">欢迎登录</h2>
-          <div class="i-flex-col">
-            <ThemeSchemaSwitch
-              :theme-schema="themeStore.themeScheme"
-              :show-tooltip="false"
-              class="text-20px lt-sm:text-18px"
-              @switch="themeStore.toggleThemeScheme"
-            />
+          <h2 class="select-none text-2xl font-extrabold tracking-wide">{{ $t('page.login.common.welcomeLogin') }}</h2>
+          <div class="i-flex-row">
             <LangSwitch
               v-if="themeStore.header.multilingual.visible"
               :lang="appStore.locale"
               :lang-options="appStore.localeOptions"
               :show-tooltip="false"
               @change-lang="appStore.changeLocale"
+            />
+            <ThemeSchemaSwitch
+              :theme-schema="themeStore.themeScheme"
+              :show-tooltip="false"
+              class="text-20px lt-sm:text-18px"
+              @switch="themeStore.toggleThemeScheme"
             />
           </div>
         </header>
