@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { $t } from '@/locales';
 import { useAppStore } from '@/store/modules/app';
 import { useAuthStore } from '@/store/modules/auth';
+import { $t } from '@/locales';
 
 defineOptions({ name: 'HeaderBanner' });
 
@@ -29,8 +29,8 @@ const statisticData = computed<StatisticData[]>(() => [
     <ElRow :gutter="gap" class="px-8px">
       <ElCol :md="18" :sm="24">
         <div class="flex-y-center">
-          <div class="size-72px shrink-0 overflow-hidden rd-1/2">
-            <img src="@/assets/imgs/soybean.jpg" class="size-full" />
+          <div class="size-72px shrink-0 overflow-hidden">
+            <img :src="authStore.userInfo.avatar" class="h-16 w-16 rounded-full object-cover" />
           </div>
           <div class="pl-12px">
             <h3 class="text-18px font-semibold">
