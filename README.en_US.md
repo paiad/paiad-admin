@@ -6,18 +6,18 @@
 
 </div>
 
-> [!note]
-> Love `paiad-admin`? Please give us a ⭐️ on GitHub! Your support drives our continuous improvement!
+> [!NOTE]
+> Love `paiad-admin`? Please give us a ⭐️ on GitHub! Your support fuels our continuous improvement!
 
 ## Overview
 
-`paiad-admin` is a sleek and powerful admin framework built with Vue3, Vite5, TypeScript, Pinia, and UnoCSS. It integrates flexible theme customization, delivering an out-of-the-box solution for efficient management systems.
+`paiad-admin` is an elegant and robust admin framework inspired by and built upon the Element Plus version of the [soybean-admin](https://github.com/soybeanjs/soybean-admin) project. It is developed using Vue3, Vite5, TypeScript, Pinia, and UnoCSS, integrating flexible theme customization. This out-of-the-box solution enables rapid development of efficient management systems.
 
 ## Core Features
 
 - Built with Vue3, Vite5, TypeScript, Pinia, and UnoCSS.
-- Uses pnpm monorepo for a clean and clear project structure.
-- Robust TypeScript type checking for enhanced code reliability.
+- Utilizes pnpm monorepo for a clean and clear project structure.
+- Strong TypeScript type checking for enhanced code reliability.
 - Diverse theme customization with UnoCSS.
 - Supports multi-language internationalization.
 - Automated file-based routing to streamline development.
@@ -52,3 +52,11 @@ pnpm dev
 ```bash
 pnpm build
 ```
+
+## Inspiration and Development
+
+`paiad-admin` is a secondary development project inspired by the Element Plus version of [soybean-admin](https://github.com/soybeanjs/soybean-admin). It builds upon the foundation of `soybean-admin`, adapting and extending its features to create a customized admin framework tailored to specific needs while retaining the original project's elegance and functionality.
+
+## License
+
+`paiad-admin` is licensed under the [MIT License](./LICENSE) © 2025 Paiad. This project is intended for learning purposes. For commercial use, please retain the original author’s copyright information from `soybean-admin` and adhere to its MIT License terms. The authors do not guarantee or assume responsibility for any risks associated with the software’s use.
