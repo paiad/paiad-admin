@@ -4,7 +4,6 @@ import type { Component } from 'vue';
 import { loginModuleRecord } from '@/constants/app';
 import { useAppStore } from '@/store/modules/app';
 import { useThemeStore } from '@/store/modules/theme';
-import { $t } from '@/locales';
 import PwdLogin from './modules/pwd-login.vue';
 import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
@@ -43,18 +42,18 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
   <div class="relative size-full flex-center overflow-hidden">
     <ParticlesBg
       class="particles-bg absolute inset-0 -z-[-1]"
-      :quantity="themeStore.darkMode ? 628 : 314"
+      :quantity="appStore.isMobile ? 0 : 314"
       :color="themeStore.darkMode ? '#6ec5ff' : '#41b291'"
       :staticity="10"
       refresh
     />
     <!--    <WaveBg :theme-color="bgThemeColor" />-->
-    <ElCard class="relative z-4 w-auto rd-12px">
-      <div class="w-400px lt-sm:w-300px">
+    <ElCard class="relative z-4 w-auto rd-26px backdrop-blur-md -mt-50px">
+      <div class="w-345px lt-sm:w-300px">
         <header class="w-full flex items-center justify-between">
           <div class="w-1/10"></div>
-          <SystemLogo class="text-50px text-primary lt-sm:text-48px" />
-          <!--          <h3 class="text-28px text-primary font-500 lt-sm:text-22px">{{ $t('system.title') }}</h3>-->
+          <SystemLogo class="text-40px text-primary lt-sm:text-48px" />
+          <h2 class="mr-8 select-none text-2xl font-extrabold tracking-wide">欢迎登录</h2>
           <div class="i-flex-col">
             <ThemeSchemaSwitch
               :theme-schema="themeStore.themeScheme"
@@ -71,9 +70,8 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
             />
           </div>
         </header>
-        <main class="pt-24px">
-          <h3 class="text-18px text-primary font-medium">{{ $t(activeModule.label) }}</h3>
-          <div class="pt-24px">
+        <main class="pt-12px">
+          <div class="pt-12px">
             <Transition :name="themeStore.page.animateMode" mode="out-in" appear>
               <component :is="activeModule.component" />
             </Transition>
