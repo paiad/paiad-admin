@@ -133,18 +133,18 @@ const customRoutes: CustomRoute[] = [
           localIcon: 'logo'
         }
       },
-      {
-        name: 'document_project-link',
-        path: '/document/project-link',
-        component: 'view.iframe-page',
-        meta: {
-          title: 'document_project-link',
-          i18nKey: 'route.document_project-link',
-          order: 2,
-          localIcon: 'logo',
-          href: 'https://paiad.online'
-        }
-      },
+      // {
+      //   name: 'document_project-link',
+      //   path: '/document/project-link',
+      //   component: 'view.iframe-page',
+      //   meta: {
+      //     title: 'document_project-link',
+      //     i18nKey: 'route.document_project-link',
+      //     order: 2,
+      //     localIcon: 'logo',
+      //     href: 'https://paiad.online'
+      //   }
+      // },
       {
         name: 'document_unocss',
         path: '/document/unocss',
