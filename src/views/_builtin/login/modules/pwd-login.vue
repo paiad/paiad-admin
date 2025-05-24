@@ -74,17 +74,15 @@ async function handleAccountLogin(account: Account) {
 
 <template>
   <ElForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false" @keyup.enter="handleSubmit">
-    <ElFormItem prop="userName">
-      <ElInput v-model="model.userName" :placeholder="$t('page.login.common.userNamePlaceholder')" />
-    </ElFormItem>
-    <ElFormItem prop="password">
-      <ElInput
-        v-model="model.password"
-        type="password"
-        show-password-on="click"
-        :placeholder="$t('page.login.common.passwordPlaceholder')"
-      />
-    </ElFormItem>
+    <IconInput v-model="model.userName" prop="userName" icon="majesticons:user-line" placeholder="请输入用户名" />
+    <IconInput
+      v-model="model.password"
+      prop="password"
+      icon="hugeicons:square-lock-password"
+      placeholder="请输入密码"
+      type="password"
+      :show-password="true"
+    />
     <ElSpace direction="vertical" :size="24" class="w-full" fill>
       <div class="flex-y-center justify-between">
         <ElCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</ElCheckbox>
