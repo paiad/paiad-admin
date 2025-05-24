@@ -318,7 +318,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     path: '/multi-menu',
     component: 'layout.base',
     meta: {
-      icon: "gg:menu-round",
+      icon: 'gg:menu-round',
       title: 'multi-menu',
       i18nKey: 'route.multi-menu',
       order: 8
