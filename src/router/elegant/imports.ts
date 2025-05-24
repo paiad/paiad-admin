@@ -27,6 +27,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   "function_hide-child_one": () => import("@/views/function/hide-child/one/index.vue"),
   "function_hide-child_three": () => import("@/views/function/hide-child/three/index.vue"),
   "function_hide-child_two": () => import("@/views/function/hide-child/two/index.vue"),
+  function_mqtt: () => import("@/views/function/mqtt/index.vue"),
   "function_multi-tab": () => import("@/views/function/multi-tab/index.vue"),
   function_request: () => import("@/views/function/request/index.vue"),
   "function_super-page": () => import("@/views/function/super-page/index.vue"),

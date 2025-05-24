@@ -154,6 +154,17 @@ export const generatedRoutes: GeneratedRoute[] = [
         ]
       },
       {
+        name: 'function_mqtt',
+        path: '/function/mqtt',
+        component: 'view.function_mqtt',
+        meta: {
+          title: 'function_mqtt',
+          i18nKey: 'route.function_mqtt',
+          icon: 'fluent:iot-24-regular',
+          order: 7
+        }
+      },
+      {
         name: 'function_multi-tab',
         path: '/function/multi-tab',
         component: 'view.function_multi-tab',

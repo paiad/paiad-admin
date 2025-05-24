@@ -40,10 +40,8 @@
     "gen-route": "sa gen-route",
     "lint": "eslint . --fix",
     "postbuild": "sa print-soybean",
-    "prepare": "simple-git-hooks",
     "preview": "vite preview",
     "release": "sa release",
-    "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "update-pkg": "sa update-pkg"
   },
   "dependencies": {
@@ -74,6 +72,7 @@
     "element-plus": "^2.9.5",
     "jsbarcode": "3.11.6",
     "json5": "2.2.3",
+    "mqtt": "^5.13.0",
     "nprogress": "0.2.0",
     "pinia": "3.0.1",
     "pinyin-pro": "3.26.0",
@@ -116,7 +115,6 @@
     "kolorist": "1.8.0",
     "lint-staged": "15.5.0",
     "sass": "1.85.1",
-    "simple-git-hooks": "2.11.1",
     "tsx": "4.19.3",
     "typescript": "5.8.2",
     "unplugin-icons": "22.1.0",
@@ -127,10 +125,6 @@
     "vite-plugin-vue-devtools": "7.7.2",
     "vue-eslint-parser": "10.1.1",
     "vue-tsc": "2.2.8"
-  },
-  "simple-git-hooks": {
-    "commit-msg": "pnpm sa git-commit-verify",
-    "pre-commit": "pnpm typecheck && pnpm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"

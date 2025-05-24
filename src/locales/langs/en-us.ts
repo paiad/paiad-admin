@@ -187,6 +187,7 @@ const local: App.I18n.Schema = {
     'function_hide-child_two': 'Two',
     'function_hide-child_three': 'Three',
     function_request: 'Request',
+    function_mqtt: 'Mqtt Client',
     'function_toggle-auth': 'Toggle Auth',
     'function_super-page': 'Super Admin Visible',
     manage: 'System Manage',
