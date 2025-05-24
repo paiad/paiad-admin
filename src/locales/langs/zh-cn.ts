@@ -310,11 +310,11 @@ const local: App.I18n.Schema = {
       projectNews: {
         title: '项目动态',
         moreNews: '更多动态',
-        desc1: 'Soybean 在2021年5月28日创建了开源项目 soybean-admin!',
-        desc2: 'Yanbowe 向 soybean-admin 提交了一个bug，多标签栏不会自适应。',
-        desc3: 'Soybean 准备为 soybean-admin 的发布做充分的准备工作!',
-        desc4: 'Soybean 正在忙于为soybean-admin写项目说明文档！',
-        desc5: 'Soybean 刚才把工作台页面随便写了一些，凑合能看了！'
+        desc1: 'Paiad 在2021年5月28日创建了开源项目 paiad-admin!',
+        desc2: 'Paiad 向 paiad-admin 提交了一个bug，多标签栏不会自适应。',
+        desc3: 'Paiad 准备为 paiad-admin 的发布做充分的准备工作!',
+        desc4: 'Paiad 正在忙于为paiad-admin写项目说明文档！',
+        desc5: 'Paiad 刚才把工作台页面随便写了一些，凑合能看了！'
       },
       creativity: '创意'
     },
