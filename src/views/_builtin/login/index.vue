@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { Component } from 'vue';
-import { getPaletteColorByNumber, mixColor } from '@sa/color';
-import { $t } from '@/locales';
+import { loginModuleRecord } from '@/constants/app';
 import { useAppStore } from '@/store/modules/app';
 import { useThemeStore } from '@/store/modules/theme';
-import { loginModuleRecord } from '@/constants/app';
+import { $t } from '@/locales';
 import PwdLogin from './modules/pwd-login.vue';
 import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
@@ -38,23 +37,20 @@ const moduleMap: Record<UnionKey.LoginModule, LoginModule> = {
 };
 
 const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
-
-const bgThemeColor = computed(() =>
-  themeStore.darkMode ? getPaletteColorByNumber(themeStore.themeColor, 600) : themeStore.themeColor
-);
-
-const bgColor = computed(() => {
-  const COLOR_WHITE = '#ffffff';
-
-  const ratio = themeStore.darkMode ? 0.5 : 0.2;
-
-  return mixColor(COLOR_WHITE, themeStore.themeColor, ratio);
-});
 </script>
 
 <template>
-  <div class="relative size-full flex-center overflow-hidden" :style="{ backgroundColor: bgColor }">
-    <WaveBg :theme-color="bgThemeColor" />
+  <div class="absolute inset-0 -z-1">
+    <ParticlesBg
+      class="particles-bg h-full w-full"
+      :quantity="1 + 1 === 2 ? 314 * 2 : 314"
+      :color="themeStore.darkMode ? '#6ec5ff' : '#41b291'"
+      :staticity="10"
+      refresh
+    />
+  </div>
+  <div class="relative size-full flex-center overflow-hidden">
+    <!--    <WaveBg :theme-color="bgThemeColor" />-->
     <ElCard class="relative z-4 w-auto rd-12px">
       <div class="w-400px lt-sm:w-300px">
         <header class="flex-y-center justify-between">
