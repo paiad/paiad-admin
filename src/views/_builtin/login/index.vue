@@ -40,16 +40,14 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
 </script>
 
 <template>
-  <div class="absolute inset-0 -z-1">
+  <div class="relative size-full flex-center overflow-hidden">
     <ParticlesBg
-      class="particles-bg h-full w-full"
-      :quantity="1 + 1 === 2 ? 314 * 2 : 314"
+      class="particles-bg absolute inset-0 -z-[-1]"
+      :quantity="themeStore.darkMode ? 628 : 314"
       :color="themeStore.darkMode ? '#6ec5ff' : '#41b291'"
       :staticity="10"
       refresh
     />
-  </div>
-  <div class="relative size-full flex-center overflow-hidden">
     <!--    <WaveBg :theme-color="bgThemeColor" />-->
     <ElCard class="relative z-4 w-auto rd-12px">
       <div class="w-400px lt-sm:w-300px">
