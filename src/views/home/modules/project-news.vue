@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $t } from '@/locales';
+import ClientAvatar from '@/components/custom/client-avatar.vue';
 
 defineOptions({ name: 'ProjectNews' });
 
@@ -32,7 +33,7 @@ const newses = computed<NewsItem[]>(() => [
     <ElTimeline>
       <ElTimelineItem v-for="item in newses" :key="item.id" :timestamp="item.time" placement="top">
         <ElSpace>
-          <SoybeanAvatar class="size-48px!" />
+          <ClientAvatar class="size-48px!" />
           <p>{{ item.content }}</p>
         </ElSpace>
       </ElTimelineItem>
