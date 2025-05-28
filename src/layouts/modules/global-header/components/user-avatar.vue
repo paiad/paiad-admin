@@ -68,7 +68,7 @@ function handleDropdown(key: DropdownKey) {
     {{ $t('page.login.common.loginOrRegister') }}
   </ElButton>
 
-  <ElDropdown class="px-14px" trigger="click" @command="handleDropdown">
+  <ElDropdown class="px-16px" trigger="click" @command="handleDropdown">
     <template #dropdown>
       <ElDropdownMenu>
         <ElDropdownItem
@@ -83,7 +83,7 @@ function handleDropdown(key: DropdownKey) {
       </ElDropdownMenu>
     </template>
     <div class="flex items-center">
-      <SvgIcon icon="ph:user-circle" class="mr-5px text-icon-large" />
+      <SvgIcon :icon-url="authStore.userInfo.avatar" class="w-7 h-7 mr-3 rounded-full overflow-hidden" />
       <span class="text-16px font-medium">{{ authStore.userInfo.userName }}</span>
     </div>
   </ElDropdown>
