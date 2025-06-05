@@ -61,7 +61,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
     light: {
       colors: {
         container: 'rgb(255, 255, 255)',
-        layout: 'rgb(247, 250, 252)',
+        layout: 'rgb(238,246,252)',
         inverted: 'rgb(0, 20, 40)',
         'base-text': 'rgb(31, 31, 31)'
       },

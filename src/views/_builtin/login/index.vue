@@ -44,7 +44,7 @@ const activeModule = computed(() => moduleMap[props.module || 'pwd-login']);
     <ParticlesBg
       class="particles-bg absolute inset-0 -z-[-1]"
       :quantity="appStore.isMobile ? 0 : 314"
-      :color="themeStore.darkMode ? '#6ec5ff' : '#41b291'"
+      :color="themeStore.darkMode ? '#6ec5ff' : '#3fe1ad'"
       :staticity="10"
       refresh
     />
