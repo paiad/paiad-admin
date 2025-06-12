@@ -149,7 +149,7 @@ const handleProfileOption = (action: string) => {
     class="mobile-app-container box-border flex items-center justify-center from-gray-100 to-gray-200 bg-gradient-to-b p-5"
   >
     <div
-      class="phone-screen relative h-[760px] w-[400px] flex flex-col overflow-hidden border-8 border-gray-900 rounded-3xl bg-white shadow-2xl"
+      class="phone-screen relative h-[800px] w-[400px] flex flex-col overflow-hidden border-8 border-gray-900 rounded-3xl bg-white shadow-2xl"
     >
       <!-- Header -->
       <header
@@ -188,9 +188,9 @@ const handleProfileOption = (action: string) => {
           <!-- Home Page -->
           <div v-if="activeTab === 'home'" class="page-content">
             <img
-              src="https://cdn.jsdelivr.net/gh/paiad/picture-bed@main/img/ae2.png"
+              src="https://cdn.jsdelivr.net/gh/paiad/picture-bed@main/img/ae7.png"
               alt="Banner"
-              class="promo-banner block w-full transform rounded-b-lg shadow-md transition-transform duration-300 hover:scale-[1.02]"
+              class="pl-2  pr-2 pt-2 radius promo-banner block w-full transform rounded-3xl shadow-md transition-transform duration-300 hover:scale-[1.02]"
             />
 
             <div class="category-grid mb-2.5 flex justify-around rounded-lg bg-white p-4 shadow-sm">
