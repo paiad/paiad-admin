@@ -40,13 +40,17 @@ declare module "@elegant-router/types" {
     "alova_scenes": "/alova/scenes";
     "alova_user": "/alova/user";
     "function": "/function";
+    "function_app": "/function/app";
+    "function_category": "/function/category";
     "function_hide-child": "/function/hide-child";
     "function_hide-child_one": "/function/hide-child/one";
     "function_hide-child_three": "/function/hide-child/three";
     "function_hide-child_two": "/function/hide-child/two";
     "function_mqtt": "/function/mqtt";
     "function_multi-tab": "/function/multi-tab";
+    "function_product": "/function/product";
     "function_request": "/function/request";
+    "function_screen": "/function/screen";
     "function_super-page": "/function/super-page";
     "function_tab": "/function/tab";
     "function_toggle-auth": "/function/toggle-auth";
@@ -174,12 +178,16 @@ declare module "@elegant-router/types" {
     | "alova_request"
     | "alova_scenes"
     | "alova_user"
+    | "function_app"
+    | "function_category"
     | "function_hide-child_one"
     | "function_hide-child_three"
     | "function_hide-child_two"
     | "function_mqtt"
     | "function_multi-tab"
+    | "function_product"
     | "function_request"
+    | "function_screen"
     | "function_super-page"
     | "function_tab"
     | "function_toggle-auth"

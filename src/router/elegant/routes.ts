@@ -107,6 +107,28 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
+        name: 'function_app',
+        path: '/function/app',
+        component: 'view.function_app',
+        meta: {
+          title: 'function_app',
+          i18nKey: '移动商城小程序',
+          icon: 'basil:app-store-solid',
+          order: 0
+        }
+      },
+      {
+        name: 'function_category',
+        path: '/function/category',
+        component: 'view.function_category',
+        meta: {
+          title: 'function_category',
+          i18nKey: '类目列表',
+          icon: 'bx:category',
+          order: 2
+        }
+      },
+      {
         name: 'function_hide-child',
         path: '/function/hide-child',
         meta: {
@@ -178,6 +200,17 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       },
       {
+        name: 'function_product',
+        path: '/function/product',
+        component: 'view.function_product',
+        meta: {
+          title: 'function_product',
+          i18nKey: '商品列表',
+          icon: 'la:product-hunt',
+          order: 1
+        }
+      },
+      {
         name: 'function_request',
         path: '/function/request',
         component: 'view.function_request',
@@ -185,6 +218,17 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'function_request',
           i18nKey: 'route.function_request',
           icon: 'carbon:network-overlay',
+          order: 3
+        }
+      },
+      {
+        name: 'function_screen',
+        path: '/function/screen',
+        component: 'view.function_screen',
+        meta: {
+          title: 'function_screen',
+          i18nKey: '数据大屏',
+          icon: 'qlementine-icons:screen-16',
           order: 3
         }
       },

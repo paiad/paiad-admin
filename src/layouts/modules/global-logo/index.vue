@@ -14,6 +14,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <RouterLink to="/" class="w-full flex-center nowrap-hidden">
     <SystemLogo class="text-30px text-primary" />
+    <span class="text-2xl font-bold text-blue-4 hover:text-primary transition-colors pl-5">华杉科技</span>
   </RouterLink>
 </template>
 
