@@ -187,7 +187,6 @@ const local: App.I18n.Schema = {
     'function_hide-child_two': '菜单二',
     'function_hide-child_three': '菜单三',
     function_request: '请求',
-    function_mqtt: 'Mqtt客户端',
     'function_toggle-auth': '切换权限',
     'function_super-page': '超级管理员可见',
     manage: '系统管理',

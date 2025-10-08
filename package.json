@@ -72,7 +72,6 @@
     "element-plus": "^2.9.5",
     "jsbarcode": "3.11.6",
     "json5": "2.2.3",
-    "mqtt": "^5.13.0",
     "nprogress": "0.2.0",
     "pinia": "3.0.1",
     "pinyin-pro": "3.26.0",

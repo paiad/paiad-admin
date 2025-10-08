@@ -44,7 +44,6 @@ declare module "@elegant-router/types" {
     "function_hide-child_one": "/function/hide-child/one";
     "function_hide-child_three": "/function/hide-child/three";
     "function_hide-child_two": "/function/hide-child/two";
-    "function_mqtt": "/function/mqtt";
     "function_multi-tab": "/function/multi-tab";
     "function_request": "/function/request";
     "function_super-page": "/function/super-page";
@@ -177,7 +176,6 @@ declare module "@elegant-router/types" {
     | "function_hide-child_one"
     | "function_hide-child_three"
     | "function_hide-child_two"
-    | "function_mqtt"
     | "function_multi-tab"
     | "function_request"
     | "function_super-page"
