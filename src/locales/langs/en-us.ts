@@ -373,6 +373,71 @@ const local: App.I18n.Schema = {
         triggerAllRequest: 'Manually Trigger All Automated Requests'
       }
     },
+    yolo: {
+      title: 'YOLO Detection',
+      subtitle: 'Upload to preview, then click "Start Detect" to run detection',
+      upload: {
+        title: 'Upload Image',
+        selectedTips: 'Image selected. Click or drag to replace.',
+        dropTips: 'Click or drag image here',
+        singleOnly: 'Only single image supported'
+      },
+      buttons: {
+        detecting: 'Detecting...',
+        startDetect: 'Start Detect'
+      },
+      result: {
+        title: 'Detection Result',
+        emptyTips: 'Please upload an image and click "Start Detect"'
+      },
+      detail: {
+        title: 'Detection Details',
+        columns: {
+          class: 'Class',
+          confidence: 'Confidence',
+          bbox: 'BBox(x1,y1,x2,y2)'
+        }
+      },
+      history: {
+        title: 'Detection History',
+        empty: 'No history records'
+      },
+      sortByTime: {
+        label: 'Sort by time:',
+        latestFirst: 'Latest first',
+        oldestFirst: 'Oldest first'
+      },
+      loading: 'Loading...',
+      meta: {
+        resolution: 'Resolution:',
+        type: 'Type:',
+        upload: 'Upload:'
+      },
+      actions: {
+        preview: 'Preview'
+      },
+      confirm: {
+        deleteHistory: 'Delete this history image?'
+      },
+      previewDialog: {
+        title: 'Preview',
+        fileName: 'File Name:',
+        resolution: 'Resolution:',
+        type: 'Type:',
+        uploadTime: 'Upload Time:',
+        url: 'URL:'
+      },
+      errors: {
+        noFileSelected: 'Please select an image first',
+        uploadFail: 'Upload failed',
+        detectFail: 'Detection failed, please retry',
+        uploadDataInvalid: 'Upload succeeded but invalid response data',
+        parseUploadResultFail: 'Failed to parse upload result',
+        fetchResultFail: 'Failed to fetch detection result',
+        fetchHistoryFail: 'Failed to fetch history',
+        deleteFail: 'Failed to delete history'
+      }
+    },
     manage: {
       common: {
         status: {

@@ -373,6 +373,71 @@ const local: App.I18n.Schema = {
         triggerAllRequest: '手动触发所有自动请求'
       }
     },
+    yolo: {
+      title: 'YOLO 检测',
+      subtitle: '上传后可预览，点击“开始检测”再检测',
+      upload: {
+        title: '上传图片',
+        selectedTips: '已选择图片，点击或拖拽可更换',
+        dropTips: '点击或拖拽图片到此处',
+        singleOnly: '仅支持单张图片'
+      },
+      buttons: {
+        detecting: '检测中...',
+        startDetect: '开始检测'
+      },
+      result: {
+        title: '检测结果',
+        emptyTips: '请先上传图片并点击“开始检测”'
+      },
+      detail: {
+        title: '检测详情',
+        columns: {
+          class: '类别',
+          confidence: '置信度',
+          bbox: 'BBox(x1,y1,x2,y2)'
+        }
+      },
+      history: {
+        title: '历史检测记录',
+        empty: '暂无历史记录'
+      },
+      sortByTime: {
+        label: '按时间排序：',
+        latestFirst: '最新优先',
+        oldestFirst: '最旧优先'
+      },
+      loading: '加载中...',
+      meta: {
+        resolution: '分辨率：',
+        type: '类型：',
+        upload: '上传：'
+      },
+      actions: {
+        preview: '预览'
+      },
+      confirm: {
+        deleteHistory: '确定删除该历史图片？'
+      },
+      previewDialog: {
+        title: '预览',
+        fileName: '文件名：',
+        resolution: '分辨率：',
+        type: '类型：',
+        uploadTime: '上传时间：',
+        url: '访问地址：'
+      },
+      errors: {
+        noFileSelected: '请先选择图片',
+        uploadFail: '上传失败',
+        detectFail: '检测失败，请重试',
+        uploadDataInvalid: '上传成功但返回数据异常',
+        parseUploadResultFail: '解析上传结果失败',
+        fetchResultFail: '获取检测结果失败',
+        fetchHistoryFail: '获取历史记录失败',
+        deleteFail: '删除历史记录失败'
+      }
+    },
     manage: {
       common: {
         status: {
