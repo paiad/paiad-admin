@@ -24,6 +24,10 @@ export function createViteProxy(env: Env.ImportMeta, enable: boolean) {
     Object.assign(proxy, createProxyItem(item, isEnableProxyLog));
   });
 
+  // YOLO backend proxy (port 5000)
+  const yoloBaseURL = env.VITE_YOLO_BASE_URL || 'http://localhost:5000';
+  Object.assign(proxy, createProxyItem({ baseURL: yoloBaseURL, proxyPattern: '/proxy-yolo' }, isEnableProxyLog));
+
   return proxy;
 }
 

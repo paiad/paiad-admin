@@ -7,28 +7,6 @@ import type { GeneratedRoute } from '@elegant-router/types';
 
 export const generatedRoutes: GeneratedRoute[] = [
   {
-    name: 'home',
-    path: '/home',
-    component: 'layout.base$view.home',
-    meta: {
-      title: 'home',
-      i18nKey: 'route.home',
-      icon: 'lucide:home',
-      order: 1
-    }
-  },
-  {
-    name: 'yolo',
-    path: '/yolo',
-    component: 'layout.base$view.yolo',
-    meta: {
-      title: 'yolo',
-      i18nKey: 'route.yolo',
-      icon: 'streamline-freehand:search-magnifier',
-      order: 2
-    }
-  },
-  {
     name: '403',
     path: '/403',
     component: 'layout.blank$view.403',
@@ -234,6 +212,17 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       }
     ]
+  },
+  {
+    name: 'home',
+    path: '/home',
+    component: 'layout.base$view.home',
+    meta: {
+      title: 'home',
+      i18nKey: 'route.home',
+      icon: 'lucide:home',
+      order: 1
+    }
   },
   {
     name: 'iframe-page',
@@ -643,6 +632,17 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'user-center',
       i18nKey: 'route.user-center',
       hideInMenu: true
+    }
+  },
+  {
+    name: 'yolo',
+    path: '/yolo',
+    component: 'layout.base$view.yolo',
+    meta: {
+      title: 'yolo',
+      i18nKey: 'route.yolo',
+      icon: 'streamline-freehand:search-magnifier',
+      order: 2
     }
   }
 ];
