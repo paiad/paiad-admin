@@ -17,6 +17,17 @@ const taskId = ref<string | null>(null);
 const resultImage = ref<string | null>(null);
 const detections = ref<Array<{ class: string; confidence: number; bbox: number[] }>>([]);
 
+// 新增：模型选择与置信度阈值
+const availableModels = [
+  { label: 'yolo11n.pt', value: 'yolo11n.pt' },
+  { label: 'yolo11s.pt', value: 'yolo11s.pt' },
+  { label: 'yolo11m.pt', value: 'yolo11m.pt' },
+  { label: 'yolo11l.pt', value: 'yolo11l.pt' },
+  { label: 'yolo11x.pt', value: 'yolo11x.pt' },
+];
+const selectedModel = ref<string>(availableModels[0].value);
+const confidence = ref<number>(0.25);
+
 // 历史记录相关状态与方法
 interface HistoryItem {
   file_id: string;
@@ -150,7 +161,12 @@ async function startDetect() {
   try {
     const fd = new FormData();
     fd.append('image', selectedFile.value.raw);
-    const resp = await fetch(`${YOLO_BASE_URL}/yolo/upload`, {
+    // 将模型名称与置信度作为查询参数传递
+    const query = new URLSearchParams({
+      model_name: selectedModel.value,
+      conf: confidence.value.toString(),
+    }).toString();
+    const resp = await fetch(`${YOLO_BASE_URL}/yolo/upload?${query}`, {
       method: 'POST',
       body: fd,
     });
@@ -235,6 +251,20 @@ async function fetchResults(tid: string) {
       <ElCol :span="10">
         <ElCard shadow="never" class="h-full">
           <div class="text-16px font-600 mb-12px">{{ $t('page.yolo.upload.title') }}</div>
+          <!-- 新增：参数设置（模型与置信度） -->
+          <div class="mb-12px flex items-center gap-12px">
+            <div class="flex items-center gap-6px">
+              <span class="text-12px color-gray-6">{{ $t('page.yolo.settings.model') }}</span>
+              <ElSelect v-model="selectedModel" size="small" style="width: 100px">
+                <ElOption v-for="m in availableModels" :key="m.value" :label="m.label" :value="m.value" />
+              </ElSelect>
+            </div>
+            <div class="flex items-center gap-6px" style="flex:1">
+              <span class="text-12px color-gray-6">{{ $t('page.yolo.settings.confidence') }}</span>
+              <ElSlider v-model="confidence" :min="0" :max="1" :step="0.01" show-input size="small" style="width: 240px"/>
+            </div>
+          </div>
+
           <ElUpload
             ref="uploadRef"
             class="upload-area"

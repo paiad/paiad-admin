@@ -376,6 +376,10 @@ const local: App.I18n.Schema = {
     yolo: {
       title: 'YOLO Detection',
       subtitle: 'Upload to preview, then click "Start Detect" to run detection',
+      settings: {
+        model: 'Model:',
+        confidence: 'Confidence Threshold:'
+      },
       upload: {
         title: 'Upload Image',
         selectedTips: 'Image selected. Click or drag to replace.',

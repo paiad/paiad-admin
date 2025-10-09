@@ -376,6 +376,10 @@ const local: App.I18n.Schema = {
     yolo: {
       title: 'YOLO 检测',
       subtitle: '上传后可预览，点击“开始检测”再检测',
+      settings: {
+        model: '模型：',
+        confidence: '置信度：'
+      },
       upload: {
         title: '上传图片',
         selectedTips: '已选择图片，点击或拖拽可更换',
