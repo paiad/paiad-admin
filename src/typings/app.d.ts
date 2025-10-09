@@ -549,6 +549,75 @@ declare namespace App {
             triggerAllRequest: string;
           };
         };
+        yolo: {
+          title: string;
+          subtitle: string;
+          settings: {
+            model: string;
+            confidence: string;
+          };
+          upload: {
+            title: string;
+            selectedTips: string;
+            dropTips: string;
+            singleOnly: string;
+          };
+          buttons: {
+            detecting: string;
+            startDetect: string;
+          };
+          result: {
+            title: string;
+            emptyTips: string;
+          };
+          detail: {
+            title: string;
+            columns: {
+              class: string;
+              confidence: string;
+              bbox: string;
+            };
+          };
+          history: {
+            title: string;
+            empty: string;
+          };
+          sortByTime: {
+            label: string;
+            latestFirst: string;
+            oldestFirst: string;
+          };
+          loading: string;
+          meta: {
+            resolution: string;
+            type: string;
+            upload: string;
+          };
+          actions: {
+            preview: string;
+          };
+          confirm: {
+            deleteHistory: string;
+          };
+          previewDialog: {
+            title: string;
+            fileName: string;
+            resolution: string;
+            type: string;
+            uploadTime: string;
+            url: string;
+          };
+          errors: {
+            noFileSelected: string;
+            uploadFail: string;
+            detectFail: string;
+            uploadDataInvalid: string;
+            parseUploadResultFail: string;
+            fetchResultFail: string;
+            fetchHistoryFail: string;
+            deleteFail: string;
+          };
+        };
         manage: {
           common: {
             status: {

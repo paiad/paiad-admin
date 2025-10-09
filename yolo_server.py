@@ -3,26 +3,59 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from ultralytics import YOLO
 from pathlib import Path
-import uuid
-import shutil
-from datetime import datetime
 from PIL import Image
+import uuid, shutil, json, pymysql, logging
+from datetime import datetime
 
 # ==============================
-# 基础配置
+# 日志配置
 # ==============================
-app = FastAPI(title="YOLO Detection API with History")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler()]
+)
+logger = logging.getLogger(__name__)
 
+# ==============================
+# FastAPI 初始化
+# ==============================
+app = FastAPI(title="YOLO Detection API with MySQL")
+
+# ==============================
+# 文件路径配置
+# ==============================
 UPLOAD_FOLDER = Path("./uploads")
 RESULT_FOLDER = Path("./results")
 
 UPLOAD_FOLDER.mkdir(exist_ok=True)
 RESULT_FOLDER.mkdir(exist_ok=True)
 
-# 静态文件目录
+# 静态资源挂载
 app.mount("/yolo/files", StaticFiles(directory=RESULT_FOLDER, html=False), name="yolo-files")
 
-# 模型缓存，避免重复加载
+# ==============================
+# 数据库连接
+# ==============================
+def get_db_connection():
+    try:
+        conn = pymysql.connect(
+            host="localhost",
+            user="root",
+            password="root",  # 修改此处
+            database="paiad-admin",
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        logger.info("✅ 数据库连接成功")
+        return conn
+    except Exception as e:
+        logger.error(f"❌ 数据库连接失败: {e}")
+        raise e
+
+# ==============================
+# 模型缓存
+# ==============================
 loaded_models = {}
 
 def get_model(model_name: str):
@@ -30,14 +63,12 @@ def get_model(model_name: str):
     if model_name not in loaded_models:
         if not model_path.exists():
             raise FileNotFoundError(f"Model file '{model_name}' not found")
+        logger.info(f"📦 正在加载模型: {model_name}")
         loaded_models[model_name] = YOLO(model_path.as_posix())
+        logger.info(f"✅ 模型加载完成: {model_name}")
+    else:
+        logger.info(f"♻️ 使用已缓存的模型: {model_name}")
     return loaded_models[model_name]
-
-# 检测结果缓存
-results_cache = {}
-
-# 历史记录缓存
-history_records = {}
 
 # ==============================
 # 上传并检测接口
@@ -46,42 +77,46 @@ history_records = {}
 async def upload_image(
     request: Request,
     image: UploadFile = File(...),
-    conf: float = 0.25,  # 置信度阈值，前端可传
-    model_name: str = "yolo11n.pt"  # 模型文件名，前端可传
+    conf: float = 0.25,
+    model_name: str = "yolo11n.pt"
 ):
+    logger.info(f"🟡 前端请求检测: 模型={model_name}, 置信度={conf}")
     image_id = uuid.uuid4().hex[:8]
     filename = f"{image_id}_{image.filename}"
     save_path = UPLOAD_FOLDER / filename
 
-    # 保存上传文件
+    # 保存上传图片
     with open(save_path, "wb") as f:
         f.write(await image.read())
+    logger.info(f"📸 图片已保存: {save_path}")
 
     try:
-        # 加载模型（动态选择）
+        # 加载模型
         model = get_model(model_name)
 
-        # YOLO 检测
+        # 执行检测
+        logger.info("🚀 开始YOLO检测...")
         detection_results = model.predict(
             source=save_path.as_posix(),
             save=True,
             save_txt=False,
-            conf=conf,  # 应用前端置信度阈值
+            conf=conf,
             project=RESULT_FOLDER.as_posix(),
             name="predict",
             exist_ok=True
         )
+        logger.info("✅ 检测完成")
 
-        # 找出 YOLO 输出的图片
+        # 查找检测结果图片
         output_dir = RESULT_FOLDER / "predict"
         result_images = list(output_dir.glob("*.jpg")) + list(output_dir.glob("*.png"))
         if not result_images:
             raise FileNotFoundError("No output image found in YOLO results.")
-
         result_image_path = max(result_images, key=lambda x: x.stat().st_mtime)
         final_path = RESULT_FOLDER / result_image_path.name
         shutil.move(result_image_path, final_path)
         shutil.rmtree(output_dir, ignore_errors=True)
+        logger.info(f"🖼 检测结果图片保存为: {final_path}")
 
         # 解析检测结果
         detections = []
@@ -95,94 +130,139 @@ async def upload_image(
                     "confidence": round(conf_score, 3),
                     "bbox": [round(x, 2) for x in xyxy]
                 })
+        logger.info(f"📊 检测结果解析完成，共 {len(detections)} 个目标")
 
-        # 保存结果缓存
-        results_cache[image_id] = {
-            "status": "completed",
-            "result": detections,
-            "result_image": final_path.name
-        }
-
-        # ===== 记录历史信息 =====
         img = Image.open(final_path)
-        history_records[image_id] = {
+
+        # 组装文件信息
+        file_info = {
             "file_id": image_id,
             "file_name": final_path.name,
             "upload_time": datetime.now().isoformat(),
             "width": img.width,
             "height": img.height,
             "file_type": final_path.suffix[1:],
-            "url": f"{str(request.base_url).rstrip('/')}/yolo/files/{final_path.name}"
+            "url": f"{str(request.base_url).rstrip('/')}/yolo/files/{final_path.name}",
+            "file_details": detections
         }
 
+        # 写入数据库
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            sql = """
+                INSERT INTO paiad_yolo
+                (file_id, file_name, upload_time, width, height, file_type, url, file_details)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (
+                file_info["file_id"],
+                file_info["file_name"],
+                file_info["upload_time"],
+                file_info["width"],
+                file_info["height"],
+                file_info["file_type"],
+                file_info["url"],
+                json.dumps(file_info["file_details"], ensure_ascii=False)
+            ))
+        conn.commit()
+        conn.close()
+        logger.info(f"💾 数据已写入数据库: {file_info['file_id']}")
+
     except Exception as e:
-        results_cache[image_id] = {"status": "failed", "error": str(e)}
+        logger.error(f"❌ 检测失败: {e}")
         return JSONResponse({"code": 500, "msg": str(e)})
 
     return JSONResponse({
         "code": 200,
         "msg": "Upload & detection successful",
-        "data": {
-            "taskId": image_id,
-            "model": model_name,
-            "confidence": conf
-        }
+        "data": file_info
     })
 
-
 # ==============================
-# 查询历史接口
+# 历史记录接口
 # ==============================
 @app.get("/yolo/history")
 async def list_history():
-    return JSONResponse({"code": 200, "msg": "Success", "data": list(history_records.values())})
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM paiad_yolo ORDER BY create_time DESC")
+            records = cursor.fetchall()
+        conn.close()
+
+        # 转换字段格式
+        for record in records:
+            # 转换 datetime 为字符串
+            for k, v in record.items():
+                if isinstance(v, datetime):
+                    record[k] = v.isoformat()
+
+            # 转换 JSON 字段
+            if record.get("file_details"):
+                record["file_details"] = json.loads(record["file_details"])
+
+        logger.info(f"📜 读取历史记录，共 {len(records)} 条")
+
+        return JSONResponse({"code": 200, "msg": "Success", "data": records})
+    except Exception as e:
+        logger.error(f"❌ 获取历史记录失败: {e}")
+        return JSONResponse({"code": 500, "msg": str(e)})
 
 
 # ==============================
-# 删除历史图片
+# 删除记录接口
 # ==============================
 @app.delete("/yolo/history/{file_id}")
 async def delete_history(file_id: str):
-    record = history_records.get(file_id)
-    if not record:
-        return JSONResponse({"code": 404, "msg": "File not found"}, status_code=404)
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT file_name FROM paiad_yolo WHERE file_id=%s", (file_id,))
+            record = cursor.fetchone()
 
-    # 删除物理文件
-    file_path = RESULT_FOLDER / record["file_name"]
-    if file_path.exists():
-        file_path.unlink()
+            if not record:
+                return JSONResponse({"code": 404, "msg": "File not found"})
 
-    # 删除缓存
-    history_records.pop(file_id, None)
-    results_cache.pop(file_id, None)
+            file_path = RESULT_FOLDER / record["file_name"]
+            if file_path.exists():
+                file_path.unlink()
 
-    return JSONResponse({"code": 200, "msg": "Deleted successfully"})
+            cursor.execute("DELETE FROM paiad_yolo WHERE file_id=%s", (file_id,))
+        conn.commit()
+        conn.close()
+        logger.info(f"🗑 已删除记录及文件: {file_id}")
 
+        return JSONResponse({"code": 200, "msg": "Deleted successfully"})
+    except Exception as e:
+        logger.error(f"❌ 删除失败: {e}")
+        return JSONResponse({"code": 500, "msg": str(e)})
 
 # ==============================
-# 获取检测结果
+# 获取结果接口
 # ==============================
-@app.get("/yolo/results/{task_id}")
-async def get_results(request: Request, task_id: str):
-    task = results_cache.get(task_id)
-    if not task:
-        return JSONResponse({"code": 404, "msg": "Task not found"}, status_code=404)
-    if task["status"] != "completed":
-        return JSONResponse({"code": 202, "msg": "Detection failed or incomplete"}, status_code=202)
+@app.get("/yolo/results/{file_id}")
+async def get_results(file_id: str):
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM paiad_yolo WHERE file_id=%s", (file_id,))
+            record = cursor.fetchone()
+        conn.close()
 
-    base_url = str(request.base_url).rstrip("/")
-    result_image_url = f"{base_url}/yolo/files/{task['result_image']}"
-    return JSONResponse({
-        "code": 200,
-        "msg": "Success",
-        "data": {
-            "taskId": task_id,
-            "results": task["result"],
-            "resultImage": result_image_url
-        }
-    })
+        if not record:
+            return JSONResponse({"code": 404, "msg": "Task not found"})
 
+        record["file_details"] = json.loads(record["file_details"]) if record.get("file_details") else []
+        logger.info(f"📦 查询检测结果: {file_id}")
+        return JSONResponse({"code": 200, "msg": "Success", "data": record})
+    except Exception as e:
+        logger.error(f"❌ 查询失败: {e}")
+        return JSONResponse({"code": 500, "msg": str(e)})
 
+# ==============================
+# 启动服务
+# ==============================
 if __name__ == "__main__":
     import uvicorn
+    logger.info("🚀 YOLO FastAPI 服务启动中...")
     uvicorn.run(app, host="0.0.0.0", port=5000)

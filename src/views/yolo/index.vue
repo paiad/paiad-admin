@@ -51,8 +51,8 @@ const sortedHistory = computed(() => {
   list.sort((a, b) => {
     const atRaw = a.upload_time ? Date.parse(a.upload_time) : 0;
     const btRaw = b.upload_time ? Date.parse(b.upload_time) : 0;
-    const at = isNaN(atRaw) ? 0 : atRaw;
-    const bt = isNaN(btRaw) ? 0 : btRaw;
+    const at = Number.isNaN(atRaw) ? 0 : atRaw;
+    const bt = Number.isNaN(btRaw) ? 0 : btRaw;
     return sortOrder.value === 'desc' ? bt - at : at - bt;
   });
   return list;
@@ -74,11 +74,11 @@ function openPreview(item: HistoryItem) {
   previewVisible.value = true;
 }
 
-function formatTime(t: string) {
+function formatTime(t?: string) {
   try {
-    return new Date(t).toLocaleString();
+    return t ? new Date(t).toLocaleString() : '';
   } catch {
-    return t;
+    return t ?? '';
   }
 }
 
@@ -399,7 +399,7 @@ function categoryColorClass(name: string) {
                 </div>
                 <div class="row-content">
                   <div class="row-title">
-                    <ElTag type="info" size="big" class="filename-tag ellipsis">{{ item.file_name }}</ElTag>
+                    <ElTag type="info" size="large" class="filename-tag ellipsis">{{ item.file_name }}</ElTag>
                   </div>
                   <div class="row-meta text-12px color-gray-6">
                     <span v-if="item.width && item.height">{{ $t('page.yolo.meta.resolution') }} {{
