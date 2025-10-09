@@ -16,7 +16,7 @@ const customRoutes: CustomRoute[] = [
     meta: {
       title: 'exception',
       i18nKey: 'route.exception',
-      icon: 'icon-park-outline:abnormal',
+      icon: 'streamline-freehand:book-flip-page',
       order: 7
     },
     children: [

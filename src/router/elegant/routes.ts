@@ -25,7 +25,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'home',
       i18nKey: 'route.home',
-      icon: 'lucide:home',
+      icon: 'solar:home-smile-angle-linear',
       order: 1
     }
   },
