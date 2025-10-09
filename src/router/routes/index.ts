@@ -59,7 +59,7 @@ const customRoutes: CustomRoute[] = [
     meta: {
       title: 'document',
       i18nKey: 'route.document',
-      order: 2,
+      order: 3,
       icon: 'hugeicons:note'
     },
     children: [
@@ -197,7 +197,7 @@ export function createStaticRoutes() {
 
   const authRoutes: ElegantRoute[] = [];
 
-  [...customRoutes, ...generatedRoutes].forEach(item => {
+  [...generatedRoutes, ...customRoutes].forEach(item => {
     if (item.meta?.constant) {
       constantRoutes.push(item);
     } else {

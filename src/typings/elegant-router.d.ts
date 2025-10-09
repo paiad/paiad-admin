@@ -88,6 +88,7 @@ declare module "@elegant-router/types" {
     "plugin_typeit": "/plugin/typeit";
     "plugin_video": "/plugin/video";
     "user-center": "/user-center";
+    "yolo": "/yolo";
   };
 
   /**
@@ -146,6 +147,7 @@ declare module "@elegant-router/types" {
     | "multi-menu"
     | "plugin"
     | "user-center"
+    | "yolo"
   >;
 
   /**
@@ -208,6 +210,7 @@ declare module "@elegant-router/types" {
     | "plugin_typeit"
     | "plugin_video"
     | "user-center"
+    | "yolo"
   >;
 
   /**
