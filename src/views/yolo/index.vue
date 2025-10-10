@@ -240,17 +240,29 @@ async function fetchResults(tid: string) {
 
 // 分类颜色样式函数
 function categoryColorClass(name: string) {
-  if (!name) return 'color-0';
+  if (!name) return 'border border-transparent bg-[#FFE6E6] text-[#B35C5C] border-[#FFCCCC]';
   let sum = 0;
   for (const ch of name) sum = (sum + ch.charCodeAt(0)) % 1000;
-  const idx = sum % 6; // 6 种颜色
-  return `color-${idx}`;
+  const idx = sum % 8; // 8 种马卡龙配色
+  const colorClasses = [
+    'border bg-[#FFE6E6] text-[#B35C5C] border-[#FFCCCC]', // 草莓奶昔粉
+    'border bg-[#FFF4E6] text-[#B38B5C] border-[#FFE0B3]', // 香草奶油黄
+    'border bg-[#E6F7FF] text-[#5C7BB3] border-[#B3E0FF]', // 薄荷海盐蓝
+    'border bg-[#E8F8F5] text-[#4FA39F] border-[#BEEDEA]', // 抹茶牛油果绿
+    'border bg-[#F6E8FF] text-[#7A5CA3] border-[#E5CCFF]', // 蓝莓薰衣草紫
+    'border bg-[#FFF0F6] text-[#A35C8A] border-[#FFCCE0]', // 覆盆子蜜桃粉
+    'border bg-[#E8FFF3] text-[#5CA377] border-[#CCFFE0]', // 开心果青
+    'border bg-[#FFF9E6] text-[#A38A5C] border-[#FFEEB3]'  // 焦糖牛奶米黄
+  ];
+  return colorClasses[idx];
 }
+
+
 </script>
 
 <template>
   <div class="p-24px">
-    <ElCard class="yolo-card">
+    <ElCard class="min-h-[560px]">
       <template #header>
         <div class="flex items-center gap-8px">
           <div class="text-20px font-700">{{ $t('page.yolo.title') }}</div>
@@ -267,12 +279,12 @@ function categoryColorClass(name: string) {
             <div class="mb-12px flex items-center gap-12px">
               <div class="flex items-center gap-6px">
                 <span class="text-12px color-gray-6">{{ $t('page.yolo.settings.model') }}</span>
-                <ElSelect v-model="selectedModel" size="small" style="width: 110px">
+                <ElSelect v-model="selectedModel" size="small" class="w-[110px]">
                   <ElOption v-for="m in availableModels" :key="m.value" :label="m.label" :value="m.value"/>
                 </ElSelect>
               </div>
-              <div class="flex items-center gap-6px" style="flex:1">
-                <span class="text-12px color-gray-6" style="white-space: nowrap;">
+              <div class="flex items-center gap-6px flex-1">
+                <span class="text-12px color-gray-6 whitespace-nowrap">
                   {{ $t('page.yolo.settings.confidence') }}
                 </span>
                 <ElSlider v-model="confidence" :min="0" :max="1" :step="0.01" show-input size="small"/>
@@ -282,7 +294,7 @@ function categoryColorClass(name: string) {
 
             <ElUpload
               ref="uploadRef"
-              class="upload-area"
+              class="w-full"
               drag
               :action="`${YOLO_BASE_URL}/yolo/upload`"
               name="image"
@@ -299,16 +311,16 @@ function categoryColorClass(name: string) {
               :on-remove="handleFileRemove"
               :on-exceed="handleExceed"
             >
-              <div class="upload-inner">
+              <div class="py-8px">
                 <template v-if="previewUrl">
-                  <div class="fixed-box small">
-                    <ElImage :src="previewUrl" fit="contain" class="preview-image"/>
+                  <div class="w-full aspect-[4/3] bg-[#f5f7fa] border border-dashed border-[var(--el-border-color)] rounded-8px flex items-center justify-center overflow-hidden max-h-[360px] h-[200px]">
+                    <ElImage :src="previewUrl" fit="contain" class="w-[94%] h-[94%]"/>
                   </div>
                   <div class="text-12px color-gray-6 mt-6px">{{ $t('page.yolo.upload.selectedTips') }}</div>
                 </template>
                 <template v-else>
-                  <div class="fixed-box">
-                    <div class="placeholder">
+                  <div class="w-full aspect-[4/3] bg-[#f5f7fa] border border-dashed border-[var(--el-border-color)] rounded-8px flex items-center justify-center overflow-hidden max-h-[360px]">
+                    <div class="text-center text-[#909399]">
                       <div class="text-16px">{{ $t('page.yolo.upload.dropTips') }}</div>
                       <div class="text-12px color-gray-6 mt-6px">{{ $t('page.yolo.upload.singleOnly') }}</div>
                     </div>
@@ -332,8 +344,8 @@ function categoryColorClass(name: string) {
             <div class="text-16px font-600 mb-12px">{{ $t('page.yolo.result.title') }}</div>
             <div v-if="!resultImage" class="color-gray-6">{{ $t('page.yolo.result.emptyTips') }}</div>
             <div v-else class="result-area">
-              <div class="fixed-box">
-                <ElImage :src="resultImage" fit="contain" class="result-image"/>
+              <div class="w-full aspect-[4/3] bg-[#f5f7fa] border border-dashed border-[var(--el-border-color)] rounded-8px flex items-center justify-center overflow-hidden max-h-[360px]">
+                <ElImage :src="resultImage" fit="contain" class="w-[94%] h-[94%]"/>
               </div>
             </div>
           </ElCard>
@@ -347,7 +359,7 @@ function categoryColorClass(name: string) {
           <ElTable :data="detections" size="small" border stripe v-if="detections.length">
             <ElTableColumn prop="class" :label="$t('page.yolo.detail.columns.class')" width="160">
               <template #default="{ row }">
-                <ElTag size="small" :class="['det-tag', categoryColorClass(row.class)]">{{ row.class }}</ElTag>
+                <ElTag size="small" :class="categoryColorClass(row.class)">{{ row.class }}</ElTag>
               </template>
             </ElTableColumn>
             <ElTableColumn prop="confidence" :label="$t('page.yolo.detail.columns.confidence')" width="160">
@@ -359,7 +371,7 @@ function categoryColorClass(name: string) {
             </ElTableColumn>
             <ElTableColumn prop="bbox" :label="$t('page.yolo.detail.columns.bbox')">
               <template #default="{ row }">
-                <span class="bbox-text">{{ Array.isArray(row.bbox) ? row.bbox.join(', ') : row.bbox }}</span>
+                <span class="text-12px">{{ Array.isArray(row.bbox) ? row.bbox.join(', ') : row.bbox }}</span>
               </template>
             </ElTableColumn>
           </ElTable>
@@ -392,16 +404,16 @@ function categoryColorClass(name: string) {
           </div>
           <div v-if="historyLoading" class="text-13px color-gray-6">{{ $t('page.yolo.loading') }}</div>
           <template v-else>
-            <div v-if="historyList.length" class="history-list">
-              <div v-for="item in pagedHistory" :key="item.file_id" class="history-row">
-                <div class="thumb-box-row" @click="openPreview(item)">
-                  <ElImage :src="item.url" fit="cover" class="thumb-image-row"/>
+            <div v-if="historyList.length" class="flex flex-col gap-12px">
+              <div v-for="item in pagedHistory" :key="item.file_id" class="grid grid-cols-[120px_1fr_auto] items-center gap-12px border border-[var(--el-border-color)] rounded-6px p-8px">
+                <div class="w-[120px] h-[90px] bg-[var(--el-fill-color-light)] rounded-4px overflow-hidden cursor-pointer" @click="openPreview(item)">
+                  <ElImage :src="item.url" fit="cover" class="w-full h-full object-cover"/>
                 </div>
-                <div class="row-content">
-                  <div class="row-title">
-                    <ElTag type="info" size="large" class="filename-tag ellipsis">{{ item.file_name }}</ElTag>
+                <div class="min-w-0">
+                  <div class="text-13px text-[var(--el-text-color-primary)] flex items-center min-w-0 mb-8px">
+                    <ElTag type="info" class="max-w-full inline-block overflow-hidden text-ellipsis whitespace-nowrap pt-4.7px">{{ item.file_name }}</ElTag>
                   </div>
-                  <div class="row-meta text-12px color-gray-6">
+                  <div class="text-12px color-gray-6">
                     <span v-if="item.width && item.height">{{ $t('page.yolo.meta.resolution') }} {{
                         item.width
                       }} x {{ item.height }}</span>
@@ -412,15 +424,15 @@ function categoryColorClass(name: string) {
                         $t('page.yolo.meta.upload')
                       }} {{ formatTime(item.upload_time) }}</span>
                   </div>
-                  <div class="row-detections text-12px mt-6px">
+                  <div class="text-12px mt-6px">
                     <template v-if="Array.isArray(item.file_details) && item.file_details.length">
-                      <div class="det-list">
+                      <div class="flex flex-wrap gap-6px">
                         <ElTag v-for="(d, idx) in item.file_details.slice(0, 6)" :key="idx" size="small"
-                               :class="['det-tag', categoryColorClass(d.class)]">
+                               :class="categoryColorClass(d.class)">
                           {{ d.class }} {{ (d.confidence * 100).toFixed(0) }}%
                         </ElTag>
                         <span v-if="item.file_details.length > 6"
-                              class="color-gray-6 det-more">+{{ item.file_details.length - 6 }}</span>
+                              class="color-gray-6">+{{ item.file_details.length - 6 }}</span>
                       </div>
                     </template>
                     <template v-else>
@@ -428,7 +440,7 @@ function categoryColorClass(name: string) {
                     </template>
                   </div>
                 </div>
-                <div class="row-actions">
+                <div class="flex items-center gap-8px">
                   <ElButton size="small" @click="openPreview(item)">{{ $t('page.yolo.actions.preview') }}</ElButton>
                   <ElPopconfirm :title="$t('page.yolo.confirm.deleteHistory')" @confirm="deleteHistory(item)">
                     <template #reference>
@@ -457,8 +469,8 @@ function categoryColorClass(name: string) {
       <!-- 预览弹窗 -->
       <ElDialog v-model="previewVisible" width="40%" :title="$t('page.yolo.previewDialog.title')">
         <div v-if="previewItem">
-          <div class="fixed-box large" style="max-height: 240px">
-            <ElImage :src="previewItem.url" fit="contain" class="result-image"/>
+          <div class="w-full aspect-[4/3] bg-[#f5f7fa] border border-dashed border-[var(--el-border-color)] rounded-8px flex items-center justify-center overflow-hidden h-[240px] max-h-[240px]">
+            <ElImage :src="previewItem.url" fit="contain" class="w-[94%] h-[94%]"/>
           </div>
           <div class="mt-12px text-13px color-gray-7">
             <div>{{ $t('page.yolo.previewDialog.fileName') }} {{ previewItem.file_name }}</div>
@@ -476,177 +488,3 @@ function categoryColorClass(name: string) {
     </ElCard>
   </div>
 </template>
-
-<style scoped>
-.yolo-card {
-  min-height: 560px;
-}
-
-.upload-area {
-  width: 100%;
-}
-
-.upload-inner {
-  padding: 8px 0;
-}
-
-.fixed-box {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: #f5f7fa;
-  border: 1px dashed var(--el-border-color);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  max-height: 360px;
-}
-
-.placeholder {
-  text-align: center;
-  color: #909399;
-}
-
-.fixed-box.large {
-  height: 240px;
-}
-
-.preview-image,
-.result-image {
-  width: 94%;
-  height: 94%;
-}
-
-.fixed-box.small {
-  height: 200px;
-}
-
-.history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.history-row {
-  display: grid;
-  grid-template-columns: 120px 1fr auto;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid var(--el-border-color);
-  border-radius: 6px;
-  padding: 8px;
-}
-
-.thumb-box-row {
-  width: 120px;
-  height: 90px;
-  background: var(--el-fill-color-light);
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.thumb-image-row {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.row-content {
-  min-width: 0;
-}
-
-.row-title {
-  font-size: 13px;
-  color: var(--el-text-color-primary);
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  margin-bottom: 7px;
-}
-
-.filename-tag {
-  max-width: 100%;
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.row-meta span + span {
-  margin-left: 8px;
-}
-
-.row-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ellipsis {
-  padding-top: 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.time-tag {
-  font-weight: 600;
-}
-
-.filename-text {
-  max-width: 100%;
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.det-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.det-tag {
-  border: 1px solid transparent;
-}
-
-.det-tag.color-0 {
-  background: #e6f7ff;
-  color: #0958d9;
-  border-color: #91caff;
-}
-
-.det-tag.color-1 {
-  background: #fff1f0;
-  color: #cf1322;
-  border-color: #ffccc7;
-}
-
-.det-tag.color-2 {
-  background: #f9f0ff;
-  color: #722ed1;
-  border-color: #d3adf7;
-}
-
-.det-tag.color-3 {
-  background: #f6ffed;
-  color: #389e0d;
-  border-color: #b7eb8f;
-}
-
-.det-tag.color-4 {
-  background: #fff7e6;
-  color: #d46b08;
-  border-color: #ffd591;
-}
-
-.det-tag.color-5 {
-  background: #f0f5ff;
-  color: #1d39c4;
-  border-color: #adc6ff;
-}
-
-</style>
