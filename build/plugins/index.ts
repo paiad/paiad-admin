@@ -13,7 +13,7 @@ export function setupVitePlugins(viteEnv: Env.ImportMeta, buildTime: string) {
     vue(),
     vueJsx(),
     setupDevtoolsPlugin(viteEnv),
-    setupElegantRouter(),
+    // setupElegantRouter(), // 已禁用自动路由生成
     setupUnocss(viteEnv),
     ...setupUnplugin(viteEnv),
     progress(),
