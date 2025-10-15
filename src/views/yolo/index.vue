@@ -404,10 +404,18 @@ function categoryColorClass(name: string) {
           </div>
           <div v-if="historyLoading" class="text-13px color-gray-6">{{ $t('page.yolo.loading') }}</div>
           <template v-else>
-            <div v-if="historyList.length" class="flex flex-col gap-12px">
+              <div v-if="historyList.length" class="flex flex-col gap-12px">
               <div v-for="item in pagedHistory" :key="item.file_id" class="grid grid-cols-[120px_1fr_auto] items-center gap-12px border border-[var(--el-border-color)] rounded-6px p-8px">
-                <div class="w-[120px] h-[90px] bg-[var(--el-fill-color-light)] rounded-4px overflow-hidden cursor-pointer" @click="openPreview(item)">
-                  <ElImage :src="item.url" fit="cover" class="w-full h-full object-cover"/>
+                <div class="w-[120px] h-[90px] bg-[var(--el-fill-color-light)] rounded-4px overflow-hidden cursor-zoom-in">
+                  <ElImage
+                    :src="item.url"
+                    fit="cover"
+                    class="w-full h-full object-cover"
+                    :preview-src-list="[item.url]"
+                    :initial-index="0"
+                    :preview-teleported="true"
+                    :z-index="3000"
+                  />
                 </div>
                 <div class="min-w-0">
                   <div class="text-13px text-[var(--el-text-color-primary)] flex items-center min-w-0 mb-8px">
