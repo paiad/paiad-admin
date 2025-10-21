@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://paiad.online/sunflower.png" width="160" />
+  <img src="https://paiad-blog.vercel.app/sunflower.png" width="160" />
 
   <h1>paiad-admin</h1>
 
