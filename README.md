@@ -100,8 +100,6 @@ paiad-admin/
 │   ├── hooks/                   # 自定义Hooks
 │   ├── materials/               # 物料组件
 │   └── scripts/                 # 构建脚本
-├── yolo_server.py              # AI检测服务
-└── build/                      # 构建配置
 ```
 
 ## 快速开始
