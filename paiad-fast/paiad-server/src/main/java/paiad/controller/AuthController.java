@@ -12,12 +12,15 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import paiad.pojo.dto.LoginDTO;
 import paiad.service.IAuthService;
+import org.springframework.validation.annotation.Validated;
+import paiad.util.IpUtils;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth/")
+@RequestMapping("/auth")
 @Tag(name = "Auth接口文档")
+@Validated
 public class AuthController {
     @Resource
     private IAuthService authService;
@@ -34,7 +37,7 @@ public class AuthController {
     @PostMapping("login")
     @Operation(summary = "用户登录")
     public SaResult login(@RequestBody @Valid LoginDTO loginDTO) {
-        return authService.login(loginDTO, request.getRemoteAddr());
+        return authService.login(loginDTO, IpUtils.getClientIp(request));
     }
 
     @PostMapping("refresh")

@@ -36,6 +36,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 注册用户
      */
+    @Override
     public SaResult register(LoginDTO userDTO) {
         // 检查用户名是否已存在
         User existingUser = findByUsername(userDTO.getUserName());
@@ -61,6 +62,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 用户登录
      */
+    @Override
     public SaResult login(LoginDTO userDTO, String ipAddress) {
         // 根据用户名查询用户
         User user = findByUsername(userDTO.getUserName());
@@ -97,6 +99,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 用 freshToken 换新token
      */
+    @Override
     public SaResult refreshToken(String refreshToken) {
         String redisKey = "paiad-token:login:refreshToken:" + refreshToken;
         String userIdStr = stringRedisTemplate.opsForValue().get(redisKey);
@@ -120,6 +123,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 判断当前用户是否登录
      */
+    @Override
     public SaResult isLogin() {
         return SaResult.data("isLogin:" + StpUtil.isLogin());
     }
@@ -127,6 +131,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 获取当前用户信息
      */
+    @Override
     public SaResult getUserInfo() {
         UserVO userVO = (UserVO) StpUtil.getSession().get("userInfo");
         log.info("{}", userVO);
@@ -136,6 +141,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 获取当前用户操作权限
      */
+    @Override
     public SaResult getPermission() {
         List<String> permissionList = StpUtil.getPermissionList();
         return SaResult.data(permissionList);
@@ -144,6 +150,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 获取当前用户角色
      */
+    @Override
     public SaResult getRole() {
         List<String> roleList = StpUtil.getRoleList();
         return SaResult.data(roleList);
@@ -152,6 +159,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     /**
      * 用户登出
      */
+    @Override
     public SaResult logout() {
         UserVO userVO = (UserVO) StpUtil.getSession().get("userInfo");
         log.info("username为:'{}' 已完成登出", userVO.getUserName());
@@ -165,9 +173,8 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
      * 根据用户名查询用户
      */
     private User findByUsername(String username) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", username);
-        return userMapper.selectOne(queryWrapper);
+        return userMapper.selectOne(new com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper<User>()
+                .eq(User::getUserName, username));
     }
 
     /**
