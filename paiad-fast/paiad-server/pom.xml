@@ -51,7 +51,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>cn.hash.HashApplication</mainClass>
+                    <mainClass>paiad.Application</mainClass>
                     <layers>
                         <enabled>true</enabled>
                     </layers>
