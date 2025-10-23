@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import paiad.pojo.dto.LoginDTO;
 import paiad.service.IAuthService;
 import org.springframework.validation.annotation.Validated;
-import paiad.util.IpUtils;
+import paiad.web.WebUtils;
 
 import java.util.Map;
 
@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("login")
     @Operation(summary = "用户登录")
     public SaResult login(@RequestBody @Valid LoginDTO loginDTO) {
-        return authService.login(loginDTO, IpUtils.getClientIp(request));
+        return authService.login(loginDTO, WebUtils.getClientIp(request));
     }
 
     @PostMapping("refresh")
