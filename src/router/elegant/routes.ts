@@ -41,6 +41,17 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'mqtt',
+    path: '/mqtt',
+    component: 'layout.base$view.mqtt',
+    meta: {
+      title: 'mqtt',
+      i18nKey: 'route.mqtt',
+      icon: 'mdi:access-point-network',
+      order: 3
+    }
+  },
+  {
     name: 'about',
     path: '/about',
     component: 'layout.base$view.about',

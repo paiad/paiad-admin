@@ -164,6 +164,7 @@ const local: App.I18n.Schema = {
     'iframe-page': '外链页面',
     home: '首页',
     yolo: 'YOLO',
+    mqtt: 'MQTT',
     document: '文档',
     document_project: '项目文档',
     'document_project-link': '项目文档(外链)',
@@ -442,6 +443,46 @@ const local: App.I18n.Schema = {
         deleteFail: '删除历史记录失败'
       }
     },
+    mqtt: {
+       title: 'MQTT 调试',
+       subtitle: '通过发布/订阅快速验证 MQTT 通道',
+       publish: {
+         title: '发布消息',
+         msg: '消息内容',
+         submit: '发布',
+         success: '发布成功'
+       },
+       subscribe: {
+         title: '订阅主题',
+         submit: '订阅',
+         success: '订阅成功'
+       },
+       common: {
+         topic: '主题',
+         qos: 'QoS',
+         qos0: 'QoS 0',
+         qos1: 'QoS 1',
+         qos2: 'QoS 2'
+       },
+       placeholders: {
+         topic: '请输入主题，如 emqx/publish',
+         msg: '请输入消息内容'
+       },
+       errors: {
+         topicRequired: '请输入主题',
+         msgRequired: '请输入消息内容'
+       },
+       logs: {
+         title: '消息日志',
+         columns: {
+           time: '时间',
+           topic: '主题',
+           qos: 'QoS',
+           msg: '消息内容'
+         },
+         empty: '暂无日志'
+       }
+     },
     manage: {
       common: {
         status: {

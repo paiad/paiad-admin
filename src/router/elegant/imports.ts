@@ -60,4 +60,5 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   plugin_video: () => import("@/views/plugin/video/index.vue"),
   "user-center": () => import("@/views/user-center/index.vue"),
   yolo: () => import("@/views/yolo/index.vue"),
+  mqtt: () => import("@/views/mqtt/index.vue"),
 };

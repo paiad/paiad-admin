@@ -164,6 +164,7 @@ const local: App.I18n.Schema = {
     'iframe-page': 'Iframe',
     home: 'Home',
     yolo: 'YOLO',
+    mqtt: 'MQTT',
     document: 'Document',
     document_project: 'Project Document',
     'document_project-link': 'Project Document(External Link)',
@@ -442,6 +443,46 @@ const local: App.I18n.Schema = {
         deleteFail: 'Failed to delete history'
       }
     },
+    mqtt: {
+       title: 'MQTT Debug',
+       subtitle: 'Publish/Subscribe to quickly validate MQTT channel',
+       publish: {
+         title: 'Publish',
+         msg: 'Message',
+         submit: 'Publish',
+         success: 'Publish succeeded'
+       },
+       subscribe: {
+         title: 'Subscribe',
+         submit: 'Subscribe',
+         success: 'Subscribe succeeded'
+       },
+       common: {
+         topic: 'Topic',
+         qos: 'QoS',
+         qos0: 'QoS 0',
+         qos1: 'QoS 1',
+         qos2: 'QoS 2'
+       },
+       placeholders: {
+         topic: 'Enter topic, e.g. emqx/publish',
+         msg: 'Enter message'
+       },
+       errors: {
+         topicRequired: 'Please enter topic',
+         msgRequired: 'Please enter message'
+       },
+       logs: {
+         title: 'Message Log',
+         columns: {
+           time: 'Time',
+           topic: 'Topic',
+           qos: 'QoS',
+           msg: 'Message'
+         },
+         empty: 'No logs yet'
+       }
+     },
     manage: {
       common: {
         status: {
