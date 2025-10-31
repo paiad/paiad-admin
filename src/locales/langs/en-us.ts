@@ -163,6 +163,7 @@ const local: App.I18n.Schema = {
     500: 'Server Error',
     'iframe-page': 'Iframe',
     home: 'Home',
+    tools: 'Tools',
     yolo: 'YOLO',
     mqtt: 'MQTT',
     document: 'Document',

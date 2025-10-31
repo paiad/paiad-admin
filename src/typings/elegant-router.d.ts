@@ -89,6 +89,10 @@ declare module "@elegant-router/types" {
     "plugin_video": "/plugin/video";
     "user-center": "/user-center";
     "yolo": "/yolo";
+    "mqtt": "/mqtt";
+    "tools": "/tools";
+    "tools_yolo": "/tools/yolo";
+    "tools_mqtt": "/tools/mqtt";
   };
 
   /**
@@ -148,6 +152,8 @@ declare module "@elegant-router/types" {
     | "plugin"
     | "user-center"
     | "yolo"
+    | "mqtt"
+    | "tools"
   >;
 
   /**
@@ -211,6 +217,9 @@ declare module "@elegant-router/types" {
     | "plugin_video"
     | "user-center"
     | "yolo"
+    | "mqtt"
+    | "tools_yolo"
+    | "tools_mqtt"
   >;
 
   /**

@@ -30,6 +30,41 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'tools',
+    path: '/tools',
+    component: 'layout.base',
+    meta: {
+      title: 'tools',
+      i18nKey: 'route.tools',
+      icon: 'formkit:tools',
+      order: 2
+    },
+    children: [
+      {
+        name: 'tools_yolo',
+        path: '/tools/yolo',
+        component: 'view.yolo',
+        meta: {
+          title: 'yolo',
+          i18nKey: 'route.yolo',
+          icon: 'streamline-freehand:search-magnifier',
+          order: 1
+        }
+      },
+      {
+        name: 'tools_mqtt',
+        path: '/tools/mqtt',
+        component: 'view.mqtt',
+        meta: {
+          title: 'mqtt',
+          i18nKey: 'route.mqtt',
+          icon: 'mdi:access-point-network',
+          order: 2
+        }
+      }
+    ]
+  },
+  {
     name: 'yolo',
     path: '/yolo',
     component: 'layout.base$view.yolo',
@@ -37,7 +72,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'yolo',
       i18nKey: 'route.yolo',
       icon: 'streamline-freehand:search-magnifier',
-      order: 2
+      order: 2,
+      hideInMenu: true
     }
   },
   {
@@ -48,7 +84,8 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'mqtt',
       i18nKey: 'route.mqtt',
       icon: 'mdi:access-point-network',
-      order: 3
+      order: 3,
+      hideInMenu: true
     }
   },
   {

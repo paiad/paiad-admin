@@ -234,7 +234,11 @@ const routeMap: RouteMap = {
   "plugin_typeit": "/plugin/typeit",
   "plugin_video": "/plugin/video",
   "user-center": "/user-center",
-  "yolo": "/yolo"
+  "yolo": "/yolo",
+  "mqtt": "/mqtt",
+  "tools": "/tools",
+  "tools_yolo": "/tools/yolo",
+  "tools_mqtt": "/tools/mqtt"
 };
 
 /**

@@ -163,6 +163,7 @@ const local: App.I18n.Schema = {
     500: '服务器错误',
     'iframe-page': '外链页面',
     home: '首页',
+    tools: '工具',
     yolo: 'YOLO',
     mqtt: 'MQTT',
     document: '文档',
