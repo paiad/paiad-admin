@@ -29,7 +29,7 @@ spring:
 
 # mqtt
 mqtt:
-  enabled: true
+  enabled: false
   broker:
     host: localhost
     port: 1883
