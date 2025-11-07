@@ -1,6 +1,7 @@
 package paiad.pojo.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import paiad.handler.StringListTypeHandler;
@@ -13,7 +14,7 @@ import java.util.List;
 @TableName(value = "paiad_user", autoResultMap = true)
 public class User implements Serializable {
 
-    @TableField("userId")
+    @TableId("userId")
     private Long userId;
 
     @TableField("userName")
