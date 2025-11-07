@@ -61,4 +61,5 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   "user-center": () => import("@/views/user-center/index.vue"),
   yolo: () => import("@/views/yolo/index.vue"),
   mqtt: () => import("@/views/mqtt/index.vue"),
+  ai: () => import("@/views/ai/index.vue"),
 };

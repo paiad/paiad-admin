@@ -236,9 +236,11 @@ const routeMap: RouteMap = {
   "user-center": "/user-center",
   "yolo": "/yolo",
   "mqtt": "/mqtt",
+  "ai": "/ai",
   "tools": "/tools",
   "tools_yolo": "/tools/yolo",
-  "tools_mqtt": "/tools/mqtt"
+  "tools_mqtt": "/tools/mqtt",
+  "tools_ai": "/tools/ai"
 };
 
 /**

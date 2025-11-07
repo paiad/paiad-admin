@@ -166,6 +166,7 @@ const local: App.I18n.Schema = {
     tools: '工具',
     yolo: 'YOLO',
     mqtt: 'MQTT',
+    ai: 'AI对话',
     document: '文档',
     document_project: '项目文档',
     'document_project-link': '项目文档(外链)',
@@ -484,6 +485,37 @@ const local: App.I18n.Schema = {
          empty: '暂无日志'
        }
      },
+    ai: {
+      title: 'AI 对话',
+      showConfig: '显示配置',
+      hideConfig: '隐藏配置',
+      config: {
+        title: 'API 配置',
+        provider: '服务提供商',
+        apiKey: 'API Key',
+        apiKeyPlaceholder: '请输入您的 API Key',
+        baseUrl: 'API 地址',
+        baseUrlPlaceholder: '请输入 API 地址，如 https://api.openai.com/v1',
+        model: '模型',
+        save: '保存',
+        reset: '重置',
+        exit: '退出',
+        saveSuccess: '保存成功',
+        errors: {
+          apiKeyRequired: '请输入 API Key'
+        }
+      },
+      chat: {
+        empty: '开始对话',
+        hint: '在顶部配置 API Key 后即可开始与 AI 对话',
+        inputPlaceholder: '输入消息...',
+        configHint: '请先配置 API Key 才能开始对话',
+        errors: {
+          sendFail: '发送失败',
+          noResponse: '未收到响应'
+        }
+      }
+    },
     manage: {
       common: {
         status: {

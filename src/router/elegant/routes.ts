@@ -58,8 +58,19 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'mqtt',
           i18nKey: 'route.mqtt',
-          icon: 'mdi:access-point-network',
+          icon: 'ph:share-network',
           order: 2
+        }
+      },
+      {
+        name: 'tools_ai',
+        path: '/tools/ai',
+        component: 'view.ai',
+        meta: {
+          title: 'ai',
+          i18nKey: 'route.ai',
+          icon: 'hugeicons:deepseek',
+          order: 3
         }
       }
     ]
@@ -85,6 +96,18 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.mqtt',
       icon: 'mdi:access-point-network',
       order: 3,
+      hideInMenu: true
+    }
+  },
+  {
+    name: 'ai',
+    path: '/ai',
+    component: 'layout.base$view.ai',
+    meta: {
+      title: 'ai',
+      i18nKey: 'route.ai',
+      icon: 'mdi:robot',
+      order: 4,
       hideInMenu: true
     }
   },

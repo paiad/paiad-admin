@@ -166,6 +166,7 @@ const local: App.I18n.Schema = {
     tools: 'Tools',
     yolo: 'YOLO',
     mqtt: 'MQTT',
+    ai: 'AI Chat',
     document: 'Document',
     document_project: 'Project Document',
     'document_project-link': 'Project Document(External Link)',
@@ -484,6 +485,37 @@ const local: App.I18n.Schema = {
          empty: 'No logs yet'
        }
      },
+    ai: {
+      title: 'AI Chat',
+      showConfig: 'Show Config',
+      hideConfig: 'Hide Config',
+      config: {
+        title: 'API Configuration',
+        provider: 'Provider',
+        apiKey: 'API Key',
+        apiKeyPlaceholder: 'Please enter your API Key',
+        baseUrl: 'API URL',
+        baseUrlPlaceholder: 'Please enter API URL, e.g. https://api.openai.com/v1',
+        model: 'Model',
+        save: 'Save',
+        reset: 'Reset',
+        exit: 'Exit',
+        saveSuccess: 'Saved successfully',
+        errors: {
+          apiKeyRequired: 'Please enter API Key'
+        }
+      },
+      chat: {
+        empty: 'Start Conversation',
+        hint: 'Configure your API Key in the settings above to begin chatting',
+        inputPlaceholder: 'Type a message...',
+        configHint: 'Please configure API Key first to start chatting',
+        errors: {
+          sendFail: 'Failed to send',
+          noResponse: 'No response received'
+        }
+      }
+    },
     manage: {
       common: {
         status: {
